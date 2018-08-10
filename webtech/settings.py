@@ -57,7 +57,7 @@ MIDDLEWARE = [
 
 ROOT_URLCONF = 'webtech.urls'
 
-ALLOWED_HOSTS = ['https://tectum5709.herokuapp.com', 'localhost', '127.0.0.1']
+ALLOWED_HOSTS = ['tectum5709.herokuapp.com', 'localhost', '127.0.0.1']
 
 TEMPLATES = [
     {
