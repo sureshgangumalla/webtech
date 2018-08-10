@@ -1,0 +1,115 @@
+{% load static %}
+{% if user.is_authenticated %}
+{% include "header.html" %}
+
+<div class="MainPage">
+   <div class="apartments content-wrapper">
+      <div class="container">
+         <form action =# method="GET" id="apartment-filter">
+         <div class="filter">
+            <div class="row">
+               <div class="results_near col-sm-4">
+
+                  <label>Showing results near</label>
+                  <select name="nearBy">
+                     <option value="DAL">Dalhousie University</option>
+                     <option value="SMU">SMU University</option>
+                     <option value="WALMART">Walmart-Mumfford</option>
+                     <option value="WALMART">Darthmouth</option>
+                     <option value="COSTCO">Costco</option>
+                  </select>
+               </div>
+               <div class="type_of_room col-sm-4">
+                  <label>Type of Room</label>
+                  <select name="TypeOfRoom">
+                     <option value="1">1 BHK</option>
+                     <option value="2">2 BHK</option>
+                     <option value="3">3 BHK</option>
+                     <option value="B">Bungalow</option>
+                     <option value="S">Single Room</option>
+                  </select>
+               </div>
+               <div class="cost_of_room col-sm-4">
+                  <label>Cost</label>
+                  <select name="priceRange">
+                     <option>Any</option>
+                     <option value="<500">Less than 500 CAD</option>
+                     <option value=">500&&<1000">500 CAD-1000 CAD</option>
+                     <option value=">1000&&<2500">1000 CAD-2500 CAD</option>
+                     <option value=">2500">Above 2500 CAD</option>
+                  </select>
+               </div>
+            </div>
+            <div class="row">
+               <div class="posession col-sm-4">
+                  <label>Posession</label>
+                  <select name="posession">
+                     <option value="<1">within 1 month</option>
+                     <option value="1-2">1-2 month</option>
+                     <!--<option>1-2 month</option>-->
+                  </select>
+               </div>
+               <div class="sharing col-sm-4">
+                  <label>Sharing</label>
+                  <select name="sharing">
+                     <option value="Y">
+                        Yeah
+                     </option>
+                     <option value="N">
+                        No 
+                     </option>
+                  </select>
+               </div>
+            </div>
+         </div>
+            <button class="btn btn-success"> Search </button>
+         </form>
+         <div class="row">
+            <div class="showing-results adjustment">
+               <div class="border1 col-sm-2">
+                  &#160;
+               </div>
+               <div class="total-results col-sm-2">
+                  Showing {{ count }} result(s)
+               </div>
+               <div class="border1 col-sm-8">
+                  &#160;
+               </div>
+            </div>
+         </div>
+         <div class="apartment-result" style="margin: auto;">
+            {% for apartment in allApartments%}
+               <div class="card" style="width: 18rem;margin: 1em;display: inline-block;">
+                  <div style="text-align: center;">
+                     <img style="width: 60%;margin: auto;padding-top: 3em;" class="card-img-top" src="{% static '' %}{{apartment.apartment_image}}" alt="Card image cap">
+                  </div>
+                 <div class="card-body">
+                     <span><h5 class="card-title">{{apartment.apartment_name}} <span class="apartment_cost">C$ {{ apartment.apartment_price }}</span></h5></span>
+                     <h6 class="card-title">Near {{apartment.near_by}}</h6>
+                     <p class="card-text">{{apartment.apartment_location }}</p>
+                     {% if is_owner %}
+                         <a href="/owner/edit/{{apartment.apartment_id }}" class="btn btn-outline-dark">Edit</a>
+                         <a href="/owner/delete/{{apartment.apartment_id }}" class="btn btn-outline-dark">Delete</a>
+                     {% else %}
+                     <a href="{{apartment.apartment_id }}" class="btn btn-outline-dark">Details</a>
+                  {% endif %}
+                  </div>
+                </div>
+            {% endfor %}
+
+      </div>
+   </div>
+   {% include "footer.html" %}
+
+</div>
+</div>
+
+{% else %}
+	<div class="p1">
+		<div class="emptyimage pt3">
+			<img src="{% static 'images/svg/alarm.svg' %}" style="width: 20%" alt="Houses and Localities">
+		</div>
+		<h1 class="emptyimage p05">Unauthorized Access!</h1>
+	</div>
+
+{% endif %}

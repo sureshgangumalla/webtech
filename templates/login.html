@@ -1,0 +1,60 @@
+{% load static %}
+{#{% csrf_token %}#}
+{% for field in form.visible_fields %}
+    {{ field.help_text }} <br/>
+    {{ field }} <br/>
+    {{ field.errors }}<br/>
+{% endfor %}
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="{% static 'css/tectum.css' %}"/>
+    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}"/>
+    <script src="{% static 'js/jquery-3.3.1.min.js' %}"></script>
+    <script src="{% static 'js/bootstrap.min.js' %}"></script>
+    <script src="{% static 'js/tectum.js' %}"></script>
+    <script src="{% static 'js/angular.min.js' %}"></script>
+    <script type="text/javascript" src="{% static 'js/script.js' %}"></script>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/style_aman.css' %}">
+
+    <title>Tectum&#x2122;</title>
+  </head>
+  <body class="loginfoot">
+
+  <nav class="navbar navbar-dark bg-dark p1">
+  		<a class="navbar-brand" href="#" onclick="window.location='/'">
+			<img src="{% static 'images/svg/font.svg' %}" width="30" height="30" class="d-inline-block align-top" alt="Tectum">
+    		<span class="texttitle">ectum</span>
+  		</a>
+
+	</nav>
+
+    <div id="loginparent" class="container" ng-app="">
+        <form method="post" id="profile_form" action="/authorize/login/" name="loginForm">
+            {% csrf_token %}
+            <h2 class="LoginHeading">My Account Login</h2>
+            <div class="row" style="padding-top: 0;margin-left: 0;margin-right: 0;">
+                <div class="loginfields">
+                    <div class="fields">
+                        <label class="">Username</label>
+                        <input type="text" id="username" ng-required="true" class="form-control" name="username" ng-model="username">
+                        <span style="color: red;" id="errorfn">{{profile_form.first_name.errors}}</span>
+                    </div>
+                    <div class="fields">
+                        <label  class="">Password</label>
+                        <input name="user_password" ng-required="true" type="password" id="user_password" class="form-control">
+                        <span style="color: red;" id="errorln">{{profile_form.last_name.errors}}</span>
+                    </div>
+                    <div class="p05">
+                        <input type="submit" class="btn appbtn" value="Login"/>
+                        <span class="login-button"><a href="../signup" class="">New to Tectum? SignUp</a></span>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+  {% include "footer.html" %}
+   </body>
+</html>

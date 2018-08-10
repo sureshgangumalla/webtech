@@ -1,0 +1,159 @@
+{% load static %}
+{% if user.is_authenticated %}
+{% include "header.html" %} 
+{% for field in form.visible_fields %}
+    {{ field.help_text }} <br/>
+    {{ field }} <br/>
+    {{ field.errors }}<br/>
+{% endfor %}
+<div id="profileparent" ng-app="">
+    <form method="post" id="owner_form" enctype="multipart/form-data" action="" name="profileForm">
+	{% csrf_token %}
+        <p class="p1 h4 emptyimage">Apartment Details</p>
+        <div class="row p4" style="padding-top: 0;margin-left: 0;margin-right: 0;">
+            <div class="col-sm-6 emptyimage">
+                <div class="centerimage">
+			<img src="{% static 'images/svg/apartment.svg' %}" style="width:50%;" class="border" alt="User" />
+                </div>
+                <div class="p1">
+                    <input type="file" name="apartment_image"/>
+                </div> 
+                <div class="emptyimage p1">
+                    {% if saved_row.is_veg == 'N' %}
+                        <img title="Non-Vegetarian" class="profile-icons ptr" id="meal" onclick="toggleMealSelection()" src="{% static 'images/svg/nv.svg' %}" alt="Non-Vegetarian">
+                        <input type="hidden" value='N' name='is_veg' id="is_veg_hidden"/>
+                    {% else %}
+                        <img title="Vegetarian" class="profile-icons ptr" id="meal" onclick="toggleMealSelection()" src="{% static 'images/svg/veg.svg' %}" alt="Vegetarian">
+                        <input type="hidden" value='V' name='is_veg' id="is_veg_hidden"/>
+                    {% endif %}
+                    {% if saved_row.is_smoke == 'N' %}
+                        <img title="Non-Smoker" class="profile-icons ptr" id="smoke" onclick="toggleSmokeSelection()" src="{% static 'images/svg/ns.svg' %}" alt="Non-Smoker">
+                        <input type="hidden" value='N' name='is_smoke' id="is_smoke_hidden"/>
+                    {% else %}
+                        <img title="Non-Smoker" class="profile-icons ptr" id="smoke" onclick="toggleSmokeSelection()" src="{% static 'images/svg/smoke.svg' %}" alt="Smoker">
+                        <input type="hidden" value='S' name='is_smoke' id="is_smoke_hidden"/>
+                    {% endif %}
+                    
+                    {% if saved_row.is_alcohol == 'N' %}
+                        <img title="Non-Alcoholic" class="profile-icons ptr" id="alcohol" onclick="toggleAlcoholSelection()" src="{% static 'images/svg/na.svg' %}" alt="Non-Alcoholic">
+                        <input type="hidden" value='N' name='is_alcohol' id="is_alcohol_hidden"/>
+                    {% else %}
+                        <img title="Non-Alcoholic" class="profile-icons ptr" id="alcohol" onclick="toggleAlcoholSelection()" src="{% static 'images/svg/drink.svg' %}" alt="Alcoholic">
+                        <input type="hidden" value='A' name='is_alcohol' id="is_alcohol_hidden"/>
+                    {% endif %}
+                    {% if saved_row.sharing == 'N' %}
+                        <img title="Exclusive" class="profile-icons ptr" id="group" onclick="toggleGroupSelection()" src="{% static 'images/svg/man.svg' %}" alt="Exclusive">
+                        <input type="hidden" value='N' name='sharing' id="is_group_hidden"/>
+                    {% else %}
+                        <img title="Shared" class="profile-icons ptr" id="group" onclick="toggleGroupSelection()" src="{% static 'images/svg/teamwork.svg' %}" alt="Shared">
+                        <input type="hidden" value='Y' name='sharing' id="is_group_hidden"/>
+                    {% endif %}
+                    <div class="p05" id="roomates_div">
+                        <label for="sharing_count" class="txtgray">Number of Roomates</label>
+                        <input type="text" name="sharing_count" id="sharing_count" value="1"/>
+                    </div>
+                </div>  
+            </div>
+            <div class="col-sm-4">
+                <div class="p05">
+                    <label for="apartment_name" class="txtgray">Apartment Name</label>
+                    <input type="text" id="apartment_name" ng-required="true" placeholder="Apartment Name e.g. Windsor Apartments" class="form-control" name="apartment_name" value="{{saved_row.apartment_name}}" ng-model="firstname">
+              		<span style="color: red;" id="errorfn">{{apartment_form.apartment_name.errors}}</span>
+                </div>
+                <div class="p05">
+                    <label for="apartment_location" class="txtgray">Location</label>
+                    <input name="apartment_location" value="{{saved_row.apartment_location}}" placeholder="e.g. Halifax" ng-required="true" type="text" id="apartment_location" class="form-control">
+                    <span style="color: red;" id="errorln">{{apartment_form.apartment_location.errors}}</span>
+                </div>
+                <div class="p05">
+                    <label for="apartment_description" class="txtgray">Description</label>
+                    <input name="apartment_description" value="{{saved_row.apartment_description}}" placeholder="e.g. Good Apartments" ng-required="true" type="text" id="apartment_description" class="form-control">
+                    <span style="color: red;" id="errorln">{{apartment_form.last_name.errors}}</span>
+                </div>
+                <div class="p05">
+                    <label for="apartment_price" class="txtgray">Apartment Cost</label>
+                    <input type="text" id="apartment_price" name="apartment_price" placeholder="e.g. 1350" value="{{saved_row.apartment_price}}" ng-required="true" class="form-control">
+                    <span style="color: red;" id="errorem">{{apartment_form.apartment_price.errors}}</span>
+                </div>
+                <div class="p05">
+                    <label for="available_units" class="txtgray">Availability</label>
+                    <input type="text" id="available_units" name="available_units" placeholder="e.g 410,1505,325" value="{{saved_row.available_units}}" ng-required="true" class="form-control">
+                    <span style="color: red;" id="errorph">{{apartment_form.available_units.errors}}</span>
+                </div>
+
+
+                <div class="p05">
+                    <label for="car_parking" class="txtgray">Parking</label>
+                    <select id="car_parking" name="car_parking" value="{{saved_row.car_parking}}" ng-required="true" class="form-control">
+                        <option value="Y">Yes</option>
+                        <option value="N">No</option>
+                    </select>
+                    <span style="color: red;" id="errorph">{{apartment_form.car_parking.errors}}</span>
+                </div>
+
+                <div class="p05">
+                    <label for="gym" class="txtgray">Gym</label>
+                    <select id="gym" name="gym" value="{{saved_row.gym}}" ng-required="true" class="form-control">
+                        <option value="Y">Yes</option>
+                        <option value="N">No</option>
+                    </select>
+                    <span style="color: red;" id="errorph">{{apartment_form.phone.errors}}</span>
+                </div>
+
+                <div class="p05">
+                    <label for="heater" class="txtgray">Heater</label>
+                    <select id="heater" name="heater" value="{{saved_row.heater}}" ng-required="true" class="form-control">
+                        <option value="Y">Yes</option>
+                        <option value="N">No</option>
+                    </select>
+                    <span style="color: red;" id="errorph">{{apartment_form.heater.errors}}</span>
+                </div>
+
+                <div class="p05">
+                    <label for="near_by" class="txtgray">Landmark</label>
+                    <select id="near_by" name="near_by" value="{{saved_row.near_by}}" ng-required="true" class="form-control">
+                        <option value="DAL">Dalhousie University</option>
+                        <option value="SMU">SMU University</option>
+                        <option value="WALMART">Walmart-Mumfford</option>
+                        <option value="WALMART">Darthmouth</option>
+                        <option value="COSTCO">Costco</option>
+                    </select>
+                </div>
+                <input type="hidden" id="apartment_user_id" name="user_id" value=""/>
+                <div class="p05">
+                    <label for="posession" class="txtgray">Date of Posession</label>
+                    <input type="text" id="posession" name="posession" ng-required="true" placeholder="e.g. 2012-04-05" value="{{saved_row.posession}}" class="form-control">
+                    <span style="color: red;" id="errorbr">{{apartment_form.posession.errors}}</span>
+                </div>
+                <div class="p05">
+                    <label for="type_of_room" class="txtgray">Type</label>
+                    <select class="form-control" name="type_of_room" id="type_of_room">
+                        <option value="1">1 BHK</option>
+                        <option value="2">2 BHK</option>
+                        <option value="3">3 BHK</option>
+                        <option value="B">Bungalow</option>
+                        <option value="S">Single Room</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+            <div class="emptyimage p1">
+                <input type="submit" class="btn btn-success" style="width: 10em;" value="Save"/>
+                <input type="clear" class="btn btn-danger" style="width: 10em;" value="Cancel"/>
+        </div>
+    </form>
+</div>
+{{apartment_form.apartment_id}}
+<script>
+    $("#owner_form").attr("action","/owner/"+localStorage.getItem('user_id')+"/save/")
+    $("#apartment_user_id").val(localStorage.getItem("user_id"));
+</script>
+{% else %}
+	<div class="p1">
+		<div class="emptyimage pt3">
+			<img src="{% static 'images/svg/alarm.svg' %}" style="width: 20%" alt="Houses and Localities">
+		</div>
+		<h1 class="emptyimage p05">Unauthorized Access!</h1>
+	</div>
+{% endif %}
+       {% include "footer.html" %}

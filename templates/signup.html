@@ -1,0 +1,53 @@
+{% load static %}
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="{% static 'css/tectum.css' %}"/>
+    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}"/>
+    <script src="{% static 'js/jquery-3.3.1.min.js' %}"></script>
+    <script src="{% static 'js/bootstrap.min.js' %}"></script>
+    <script src="{% static 'js/tectum.js' %}"></script>
+    <script src="{% static 'js/angular.min.js' %}"></script>
+    <script type="text/javascript" src="{% static 'js/script.js' %}"></script>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/style_aman.css' %}">
+
+    <title>Tectum&#x2122;</title>
+  </head>
+<nav class="navbar navbar-dark bg-dark p1">
+  		<a class="navbar-brand" href="#" onclick="window.location='/'">
+			<img src="{% static 'images/svg/font.svg' %}" width="30" height="30" class="d-inline-block align-top" alt="Tectum">
+    		<span class="texttitle">ectum</span>
+  		</a>
+
+	</nav>
+{% block content %}
+  <div class="SignupPage container">
+    <h1 class="SignUpHeader">Create New Account</h1>
+  <div class="Signupform">
+    <form method="post">
+      {% csrf_token %}
+      {% for field in form %}
+          <div class="fields">
+
+        {{ field.label_tag }}
+
+        {{ field }}
+
+        {% if field.help_text %}
+          <small class="smalltext" style="color: grey">{{ field.help_text }}</small>
+        {% endif %}
+          </div>
+        {% for error in field.errors %}
+          <p style="color: red">{{ error }}</p>
+        {% endfor %}
+
+    {% endfor %}
+    <div class="butons">
+    <button type="submit" class="btn appbtn">Sign up</button>
+        <span class="login-button"><a href="../login" class="">Existing User? Login</a></span>
+    </div>
+  </form>
+</div>
+  </div>
+{% endblock %}
+{% include "footer.html" %}
