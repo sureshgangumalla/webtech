@@ -25,7 +25,7 @@ SECRET_KEY = 'd_7#@e@!az98ipw2x9)s2q9!8lvv7-mls+cv&r7abx#sn^*7&d'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['tectum5709.herokuapp.com', '127.0.0.1', '0.0.0.0',]
 
 
 # Application definition
@@ -57,7 +57,7 @@ MIDDLEWARE = [
 
 ROOT_URLCONF = 'webtech.urls'
 
-ALLOWED_HOSTS = ['tectum5709.herokuapp.com', 'localhost', '127.0.0.1']
+
 
 TEMPLATES = [
     {
