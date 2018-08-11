@@ -85,10 +85,10 @@ WSGI_APPLICATION = 'webtech.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'gangumalla',
-        'USER': 'gangumalla',
-        'PASSWORD': 'B00789128',
-        'HOST': 'db.cs.dal.ca',
+        'NAME': 'CSCI5308_7_DEVINT',
+        'USER': 'CSCI5308_7_DEVINT_USER',
+        'PASSWORD': 'CSCI5308_7_DEVINT_7061',
+        'HOST': 'db-5308.cs.dal.ca',
         'PORT': '3306',
     }
 }
