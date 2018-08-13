@@ -23,6 +23,15 @@
 			<img src="{% static 'images/svg/font.svg' %}" width="30" height="30" class="d-inline-block align-top" alt="Tectum">
     		<span class="texttitle">ectum</span>
   		</a>
+        <div class="Searchbar">
+            <form id="search_form" name="SearchForm" action="/apartments/search/" method="post">
+                {% csrf_token %}
+                <div class="search">
+                <input type="search" id="keywords" name="keywords" value="" maxlength="255" placeholder="Search Apartment" class="ui-autocomplete-input" autocomplete="off">
+                <span class="searchicon"><img class="searchicon" src="../../static/images/svg/magnifying-glass.svg" alt="search icon"/></span>
+                </div>
+            </form>
+        </div>
   		<div class="navbar-nav-scroll">
 		    <ul class="navbar-nav bd-navbar-nav flex-row">
 		      {% if "owner" not in request.get_full_path%}

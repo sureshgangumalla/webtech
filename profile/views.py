@@ -6,6 +6,8 @@ from django.shortcuts import render,render_to_response
 from django.http import HttpResponse,HttpResponseRedirect
 from django.template import RequestContext
 from profile.models import Profile
+from Apartments.models import Apartment
+
 # Create your views here.`
 #To load profile form
 def profile_form(request,user_id):
@@ -70,3 +72,25 @@ def return_profile_page(request,user_id):
 def validate_form_data(user):
     validate_email(user.email)
     #raise forms.ValidationError("Please check your email")
+
+def payment_apartment(request, apartment_id, user_id):
+    request.META["CSRF_COOKIE_USED"] = True
+    apartment_id = int(apartment_id)
+    user_id = int(user_id)
+    apartment = Apartment.objects.get(apartment_id=apartment_id)
+    payer = Profile.objects.get(user_id=user_id)
+    price = int(apartment.apartment_price)
+    owner_credits = int(payer.credits)
+    print(owner_credits)
+    print(price)
+    if owner_credits >= price:
+        owner_credits = int(owner_credits - price)
+        payer.credits=owner_credits
+        payer.save()
+        print("Success")
+        return render(request, 'thankyou.html', {'user': payer, 'apartment': apartment, 'msg': "Success"})
+    else:
+        print("failed")
+        return render(request, 'payment.html', {'user': payer, 'apartment': apartment, 'msg': "Insufficient Credits"})
+
+

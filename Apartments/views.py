@@ -5,7 +5,7 @@ from Apartments.models import Apartment
 import sys
 sys.path.append("..")
 from feedback.models import Feedback
-
+from django.contrib.postgres.search import SearchVector
 from django.http import HttpResponse,HttpResponseRedirect
 #from Apartments.filters import ApartmentFilter
 
@@ -44,3 +44,17 @@ class Apartment_list_view():
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         return context
+    def apartment_payment(request,apartment_id):
+        apartment_id = int(apartment_id)
+        apartment = Apartment.objects.get(apartment_id=apartment_id)
+        print(apartment)
+        return render(request, "payment.html",{'apartment': apartment})
+
+    def search_apartment(request):
+        if request.method == 'POST':
+            search_value = request.POST.get('keywords', '')
+            all_apartments = Apartment.objects.filter(apartment_name=search_value)
+            args = {'allApartments' : all_apartments,'count':all_apartments.count}
+            return render(request, "apartment.html", args)
+
+

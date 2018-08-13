@@ -47,6 +47,11 @@
                         <input name="user_password" ng-required="true" type="password" id="user_password" class="form-control">
                         <span style="color: red;" id="errorln">{{profile_form.last_name.errors}}</span>
                     </div>
+                      {%  if invalid_credentials  %}
+                          <div class="login-invalidmsg">
+                              Invalid Credentials, Please Try with correct credentials..
+                          </div>
+                      {% endif %}
                     <div class="p05">
                         <input type="submit" class="btn appbtn" value="Login"/>
                         <span class="login-button"><a href="../signup" class="">New to Tectum? SignUp</a></span>
@@ -55,6 +60,5 @@
             </div>
         </form>
     </div>
-  {% include "footer.html" %}
    </body>
 </html>

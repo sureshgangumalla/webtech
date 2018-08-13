@@ -6,5 +6,6 @@ urlpatterns = [
     path('',Apartment_list_view.all_apartments),
     path('<int:apartment_id>/', Apartment_list_view.apartment_form, name="apartment_page"),
     path('owner/<int:user_id>/', Apartment_list_view.apartment_by_user, name="apartment_page"),
-
+    path('payment/<int:apartment_id>/', Apartment_list_view.apartment_payment, name="apartment_payment"),
+    path('search/', Apartment_list_view.search_apartment, name="search_apartments"),
 ]

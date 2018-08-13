@@ -18,7 +18,7 @@
                            Description:{{ apartment.apartment_description }}
                         </div>
 
-                        <div class="apartment-desc-pd">
+                        <div class="apartment-desc-pd ">
                            Near By:{{ apartment.near_by }}
                         </div>
                         <div class="apartment-desc-pd">
@@ -78,9 +78,9 @@
                               </div>
                               <div class="col-sm-3">
                                  <div class="Details-apartment">
-                                    <div class="" onclick="book_now_click()">
-                                       <img class="requestdetails" src="../../static/images/svg/info.svg"/>
-                                        <a class="" href="{{ unit }}"><img src="../../static/images/svg/buy.svg"/></a>
+                                    <div class="">
+                                       <img class="requestdetails" src="../../static/images/svg/info.svg" onclick="book_now_click()"/>
+                                        <a class="" onclick="paymentApartment({{apartment.apartment_id}})"><img src="../../static/images/svg/buy.svg"/></a>
                                     </div>
                                  </div>
                               </div>
@@ -169,7 +169,7 @@
                Type of Room: {{ apartment.type_of_room }}
             </div>
              <div class="Possession">
-               Possession Date: {{ apartment.posesssion }}
+               Possession Date: {{ apartment.posession }}
             </div>
 
             <div class="cost">
@@ -195,7 +195,6 @@
             </div>
          </div>
          </div>
-         {% include "footer.html" %}
 
       <div class="hidden-xs overlay-layer">&nbsp;</div>
       <script >

@@ -232,8 +232,25 @@ changeRating = function(value){
 }
 deleteApartment = function clicked(apartmentId) {
        if (confirm('Do you want to delete apartment?')) {
-           window.location='/owner/delete'+apartmentId+'/';
+           userId = localStorage.getItem('user_id');
+           window.location='/owner/delete/'+apartmentId+'/'+userId;
        } else {
            return false;
        }
-    }
+}
+paymentApartment = function clicked(apartmentId) {
+       if (confirm('Do you want to book the apartment?')) {
+           userId = localStorage.getItem('user_id');
+           window.location='/apartments/payment/'+apartmentId
+       } else {
+           return false;
+       }
+}
+showApartment = function clicked(apartmentId) {
+    window.location='/apartments/'+apartmentId
+}
+
+paymentAndBookApartment = function clicked(apartmentId) {
+       userId = localStorage.getItem('user_id');
+       window.location='/profile/payment/'+apartmentId+'/'+userId
+}

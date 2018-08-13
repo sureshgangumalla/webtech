@@ -57,7 +57,7 @@
             <div class="col-sm-4">
                 <div class="p05">
                     <label for="apartment_name" class="txtgray">Apartment Name</label>
-                    <input type="text" id="apartment_name" ng-required="true" placeholder="Apartment Name e.g. Windsor Apartments" class="form-control" name="apartment_name" value="{{saved_row.apartment_name}}" ng-model="firstname">
+                    <input type="text" id="apartment_name" ng-required="true" placeholder="Apartment Name e.g. Windsor Apartments" class="form-control" name="apartment_name" value="{{saved_row.apartment_name}}" autofocus>
               		<span style="color: red;" id="errorfn">{{apartment_form.apartment_name.errors}}</span>
                 </div>
                 <div class="p05">
@@ -122,7 +122,7 @@
                 <input type="hidden" id="apartment_user_id" name="user_id" value=""/>
                 <div class="p05">
                     <label for="posession" class="txtgray">Date of Posession</label>
-                    <input type="text" id="posession" name="posession" ng-required="true" placeholder="e.g. 2012-04-05" value="{{saved_row.posession}}" class="form-control">
+                    <input type="text" id="posession" name="posession" ng-required="true" placeholder="YYYY-MM-DD" value="{{saved_row.posession|date:"Y-m-d"}}" class="form-control">
                     <span style="color: red;" id="errorbr">{{apartment_form.posession.errors}}</span>
                 </div>
                 <div class="p05">
@@ -156,4 +156,3 @@
 		<h1 class="emptyimage p05">Unauthorized Access!</h1>
 	</div>
 {% endif %}
-       {% include "footer.html" %}

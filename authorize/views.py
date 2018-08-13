@@ -45,6 +45,9 @@ def auth_login(request):
                     login(request, user)
                     print("User id - " + str(profile.user_id) )
                     return render(request, 'home.html',{'profile_user_id':profile.user_id})#render_to_response('home.html',{'profile_user_id':profile.user_id},locals())
+            else:
+                return render(request, 'login.html',{'invalid_credentials':True})
+
         except:
             print("user doesnt exists..")
             return render(request, 'login.html')

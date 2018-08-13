@@ -1,5 +1,5 @@
 {% load static %}
-{% if user.is_authenticated %}
+{#{% if user.is_authenticated %}#}
     <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -22,28 +22,23 @@
 
 	</nav>
 
-    <div class="PaymentPage container">
-    <div class="apartmentPaymentdetails">
-        <div class="bookingDetail">Booking Details</div>
-<div class="paddingdiv">
-    <div class="row">
+    <div class="ThankyouPage container">
+    <div class="ThankYouPageDetails">
+        <div class="paddingblue">
+        <div class="thankyou"><h1>Congratulations</h1>
+        </div>
+            <div class="padd">
+        <div class=""><h2>Your transaction has been success.</h2></div>
+        <div class="">
+        <h1>Your Purchase details are as below:</h1>
+        </div>
+    <div class="">
 
         <h4>Apartment: {{ apartment.apartment_name }}.</h4>
     </div>
-        <div class="row">
-            <h4>Price:  {{ apartment.apartment_price }}.</h4></div>
-                <div class="row">
-
-        <h4>Possession:  {{ apartment.posession }}.</h4>
-
-                </div>
-      <div class="paynow">
-        <a class="btn btn-outline-dark" onclick="paymentAndBookApartment({{ apartment.apartment_id }})">Pay Now <img src="/static/images/svg/payment-method.svg"/></a>
+        <div class="">
+            <h3>Price:  {{ apartment.apartment_price }}.</h3></div>
+    </div>
         </div>
-    </div>
-
-    </div>
-
-
-    </div>
-{% endif %}
+            </div>
+            </div>
