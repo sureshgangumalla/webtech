@@ -18,7 +18,7 @@ def authorize(request):
             user = authenticate(username=username, password=raw_password)
             login(request, user)
             print(profile.user_id)
-            return render('home.html',{'profile_user_id':profile.user_id},locals())
+            return render_to_response('home.html',{'profile_user_id':profile.user_id},locals())
         else:
             return render(request, 'signup.html', {'form': form})
     else:
